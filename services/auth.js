@@ -1,23 +1,23 @@
 const jwt = require("jsonwebtoken");
 
-const { User } = require("../models/user.js");
+const { Patient } = require("../models/patient");
 const ERROR = require("../types/error");
 
-const register = async (username, password, bio, education) => {
-  const user = await User.findOne({ username });
+const register = async (name, email, password, phoneNumber, dateOfBirth) => {
+
+  const user = await Patient.findOne({ email });
+
   if (user) throw new Error(ERROR.USERNAME_EXISTED);
-  const newUser = new User({
-    username,
-    bio,
-    education,
+  const newPatient = new Patient({
+    name, email, password, phoneNumber, dateOfBirth
   });
-  newUser.generatePassword(password);
-  return newUser.save();
+  newPatient.generatePassword(password);
+  return newPatient.save();
 };
 
-const login = async (username, password) => {
-  const user = await User.findOne({ username });
-  if (!user) throw new Error(ERROR.USERNAME_NOT_EXISTED);
+const login = async (email, password) => {
+  const user = await Patient.findOne({ email });
+  if (!user) throw new Error(ERROR.EMAIL_NOT_EXISTED);
   if (!user.validatePassword(password)) {
     throw new Error(ERROR.PASSWORD_NOT_MATCHED);
   }
@@ -26,7 +26,7 @@ const login = async (username, password) => {
 
 const generateJWT = (user) => {
   const accessToken = jwt.sign(
-    { username: user.username },
+    { email: user.email },
     process.env.JWT_SECRET
   );
   return accessToken;
@@ -34,7 +34,7 @@ const generateJWT = (user) => {
 
 const generateSession = (user) => {
   const accessToken = jwt.sign(
-    { exp: Math.floor(Date.now() / 1000) + 60 * 10, username: user.username },
+    { exp: Math.floor(Date.now() / 1000) + 60 * 10, email: user.email },
     process.env.JWT_SECRET
   );
   return accessToken;

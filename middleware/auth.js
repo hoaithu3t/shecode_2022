@@ -1,5 +1,5 @@
 const jwt = require('jsonwebtoken');
-const { User } = require('../models/user');
+const { Patient } = require('../models/patient');
 const ERROR = require('../types/error');
 
 const authMiddleware = (option = { optional: false }) => (req, res, next) => {
@@ -12,7 +12,7 @@ const authMiddleware = (option = { optional: false }) => (req, res, next) => {
           .status(401)
           .json({ success: false, err: ERROR.INVALID_TOKEN });
       }
-      const user = await User.findOne({
+      const user = await Patient.findOne({
         username: tokenPayload.username,
       }).select(['-hash', '-salt']);
       if (user) {

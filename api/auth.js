@@ -8,11 +8,10 @@ const {
 const ERROR = require("../types/error");
 
 router.post("/register", (req, res) => {
-  const { username, password, bio, education } = req.body;
-  console.log('da register');
-  register(username, password, bio, education)
+  const { name, email, password, phoneNumber, dateOfBirth } = req.body;
+  register(name, email, password, phoneNumber, dateOfBirth)
     .then((result) => {
-      res.json({ success: true });
+      res.json({ success: true, result });
     })
     .catch((err) => {
       switch (err.message) {
@@ -27,10 +26,8 @@ router.post("/register", (req, res) => {
 });
 
 router.post("/login", (req, res) => {
-  console.log('da register');
-
-  const { username, password } = req.body;
-  login(username, password)
+  const { email, password } = req.body;
+  login(email, password)
     .then((user) => {
       const token = generateJWT(user);
       const session = generateSession(user);

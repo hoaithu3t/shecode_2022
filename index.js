@@ -17,8 +17,8 @@ const pool = new Pool({
   },
 });
 mongoose.connect(
-  // process.env.MONGO_HOST,
-  `mongodb://${process.env.MONGO_OFF_HOST}:${process.env.MONGO_PORT}/${process.env.MONGO_DBNAME}`,
+  process.env.MONGO_HOST,
+  // `mongodb://${process.env.MONGO_OFF_HOST}:${process.env.MONGO_PORT}/${process.env.MONGO_DBNAME}`,
 
   // `mongodb://${process.env.MONGO_HOST}:${process.env.MONGO_PORT}/${process.env.MONGO_DBNAME}`,
   {
