@@ -25,9 +25,9 @@ const getListDoctor = async ({textSearch = '', lat,long}) => {
 
         return abs(R * c / 1000); // in metres        
     }
-    const doctor = await Doctor.find(        
+    const doctor = textSearch ?  await Doctor.find(        
         { textSearch: { $regex: new RegExp(`.*${textSearch}.*`), $options: "i" } },
-    ).exec();
+    ).exec() : await Doctor.aggregate().exec();
     doctor.sort((doctorA, doctorB) => getDistance(doctorA.lat, doctorA.long, lat,long)< getDistance(doctorB.lat, doctorB.long, lat,long))
     return doctor;
 };

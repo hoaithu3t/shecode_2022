@@ -10,7 +10,7 @@ router.post("/", (req, res) => {
   createDoctor(req.body).then((doctor) => res.json(doctor));
 });
 
-router.get("/", (req, res) => {
+router.post("/listDoctor", (req, res) => {
   getListDoctor(req.body).then((doctor) => {
     res.json(doctor);
   });

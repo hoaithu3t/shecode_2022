@@ -23,7 +23,7 @@ const patientSchema = mongoose.Schema(
         type: String,
         required: true,
     },
-    dateOfBirth: Date,    
+    dateOfBirth: Date,  
   },
   {
     timestamps: true,
