@@ -14,6 +14,7 @@ router.post("/register", (req, res) => {
       res.json({ success: true, result });
     })
     .catch((err) => {
+      console.error(err)
       switch (err.message) {
         case ERROR.USERNAME_EXISTED:
           res.status(409).json({ success: false, err: ERROR.USERNAME_EXISTED });

@@ -10,12 +10,6 @@ const router = require("./api");
 const { Pool } = require("pg");
 const app = express();
 
-const pool = new Pool({
-  connectionString: process.env.DATABASE_URL,
-  ssl: {
-    rejectUnauthorized: false,
-  },
-});
 mongoose.connect(
   process.env.MONGO_HOST,
   // `mongodb://${process.env.MONGO_OFF_HOST}:${process.env.MONGO_PORT}/${process.env.MONGO_DBNAME}`,

@@ -10,15 +10,7 @@ const doctorSchema = Schema(
     email: {
         type: String,
         required: true,
-      },  
-    hash: {
-        type: String,
-        required: true,
-    },
-    salt: {
-        type: String,
-        required: true,
-    },
+      },
     phoneNumber: {
         type: String,
         required: true,
@@ -31,14 +23,23 @@ const doctorSchema = Schema(
     long: Number,
     rating: Number,
     services: [{
-      type: Schema.Types.ObjectId,
-      ref: "Service",
-      required: true,
+      type: {
+        name: {
+            type: String,
+            required: true,
+        },
+        price: {
+            type: Number,
+            required: true,
+          },  
+        rating: Number,
+      },
     }],
     listTimeSlots: [{
-      type: Schema.Types.ObjectId,
-      ref: "TimeSlot",
-      required: true,
+      type: {    
+        value: Date,
+        freeTime: [Date],
+    }    
     }],
     listNameServices: String,
     address: String,

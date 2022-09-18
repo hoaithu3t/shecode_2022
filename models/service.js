@@ -12,17 +12,6 @@ const doctorSchema = Schema(
         required: true,
       },  
     rating: Number,
-    comment: {
-        type: {
-          note: String,
-          patient: {
-            type: Schema.Types.ObjectId,
-            ref: "Patient",
-            required: true,
-          },
-        },
-        required: true,
-    },
   },
   {
     timestamps: true,

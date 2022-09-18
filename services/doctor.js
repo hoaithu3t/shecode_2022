@@ -4,9 +4,8 @@ const { Doctor } = require("../models/doctor");
 const ERROR = require("../types/error");
 
 const createDoctor = (user) => {
-  const newDoctor = new Doctor({
-    name: user.name, email, password, phoneNumber, dateOfBirth, lat, long, services, listTimeSlots, address, description
-  });
+    //name, email, password, phoneNumber, dateOfBirth, lat, long, services, listTimeSlots, address, description
+  const newDoctor = new Doctor(user);
   newDoctor.generateTextSearch();
   return newDoctor.save();
 };
